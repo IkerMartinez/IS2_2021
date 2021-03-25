@@ -10,10 +10,16 @@ public class Sonando extends AlarmasState {
 	 }
 	 
 	 public void exitAction(Alarmas context) {
-		 
+		 context.desactivarMelodia();
 	 }
 	 
-	 public void apagar() {
-		 
+	 public void apagar(Alarmas context) {
+		 this.exitAction(context);
+		 if (context.alarmasActivas().length == 0) {
+			 context.setState(estadoDesprogramado);
+		 } else {
+			 context.setState(estadoProgramado);
+
+		 }
 	 }
 }

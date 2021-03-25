@@ -38,15 +38,19 @@ public class Alarmas {
 	public void desactivarMelodia() {
 	}
 	public void apagar() {
+		state.apagar(this);
 	}
 	public void alarmaOn() {
-		
+		state.alarmaOn(this);
 	}
 	public void alarmaOff() {
+		state.alarmaOff(this);
 	}
 	public void nuevaAlarma() {
+		state.nuevaAlarma(this);
 	}
 	public void borraAlarma() {
+		state.borraAlarma(this);
 	}
 	
 }
