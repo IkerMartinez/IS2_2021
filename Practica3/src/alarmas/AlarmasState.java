@@ -32,4 +32,14 @@ public abstract class AlarmasState {
 	 public void exitAction(Alarmas context) {
 		 
 	 }
+	 
+	 public static AlarmasState getEstadoProgramado() {
+		 return estadoProgramado;
+	 }
+	 public static AlarmasState getEstadoSonando() {
+		 return estadoSonando;
+	 }
+	 public static AlarmasState getEstadoDesprogramado() {
+		 return estadoDesprogramado;
+	 }
 }

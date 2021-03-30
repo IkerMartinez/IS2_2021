@@ -1,8 +1,16 @@
 package alarmas;
 
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+
 public class Alarmas {
 
+	protected final static int INTERVALO_SONAR = 5000;
 	private AlarmasState state;
+	private ArrayList<Alarma> alarmas = new ArrayList<Alarma>();
+	private ArrayList<Alarma> alarmasActivas = new ArrayList<Alarma>();
+	private ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
+	private PriorityQueue<Alarma> alarmasPrioridad = new PriorityQueue<Alarma>();
 	
 	public Alarmas() {
 		state = AlarmasState.init(this);
@@ -13,30 +21,45 @@ public class Alarmas {
 	}
 	
 	public void activarMelodia() {
-		
+		System.out.println("Musica suena");
 	}
 	public boolean eliminaAlarma(Alarma a) {
+		if (buscaAlarma(a.getId()) == a) {
+			alarmas.remove(a);
+			return true;
+		}
+		
 		return false;
 	}
 	public boolean anhadeAlarma(Alarma a) {
-		return false;
+		alarmas.add(a);
+		alarmasActivas.add(a);
+		return true;
 	}
+	//TODO
 	public Alarma alarmaMasProxima() {
 		return null;
 	}
+	
 	public void desactivaAlarma(Alarma a) {
-		
+		alarmasActivas.remove(a);
+		alarmasDesactivadas.add(a);
 	}
 	public void activaAlarma(Alarma a) {
+		alarmasDesactivadas.remove(a);
+		alarmasActivas.add(a);
 	}
-	public Alarma[] alarmasActivas() {
-		return null;
+	public ArrayList<Alarma> alarmasActivas() {
+		return alarmasActivas;
 	}
-	public Alarma[] alarmasDesactivadas() {
-		return null;
+	public ArrayList<Alarma> alarmasDesactivadas() {
+		return alarmasDesactivadas;
 	}
+	
 	public void desactivarMelodia() {
+		System.out.println("Musica deja de sonar");
 	}
+	
 	public void apagar() {
 		state.apagar(this);
 	}
@@ -53,4 +76,12 @@ public class Alarmas {
 		state.borraAlarma(this);
 	}
 	
+	public Alarma buscaAlarma(String id) {
+		for (int i = 0; i < alarmas.size(); i++) {
+			if (alarmas.get(i).getId() == id) {
+				return alarmas.get(i);
+			}
+		}
+		return null;
+	}
 }

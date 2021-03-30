@@ -1,10 +1,12 @@
 package alarmas;
 
+import java.util.Date;
+
 public class Alarma {
 
 	private  String id;
-	private int hora;
-	public Alarma(String id, int hora) {
+	private Date hora;
+	public Alarma(String id, Date hora) {
 		
 		this.id = id;
 		this.hora = hora;
@@ -15,10 +17,10 @@ public class Alarma {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getHora() {
+	public Date getHora() {
 		return hora;
 	}
-	public void setHora(int hora) {
+	public void setHora(Date hora) {
 		this.hora = hora;
 	}
 }
