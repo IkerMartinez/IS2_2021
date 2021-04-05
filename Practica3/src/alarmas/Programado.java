@@ -12,7 +12,6 @@ public class Programado extends AlarmasState {
 			context.setState(estadoDesprogramado);
 		}
 		if (context.alarmaMasProxima() != null) {
-			context.setState(estadoSonando);
 			 proximaTask = new ProximaTask(context);
 			 timer.schedule(proximaTask, context.alarmaMasProxima().getHora());
 		}
@@ -21,6 +20,8 @@ public class Programado extends AlarmasState {
 	public void alarmaOn(Alarmas context) {
 		context.alarmaOn();
 	}
+	
+	//TODO Pasarle la alrma que vayamos a apagar y cancelar el timer si la alarma es la más próxima
 	public void alarmaOff(Alarmas context) {
 		context.alarmaOff();
 		

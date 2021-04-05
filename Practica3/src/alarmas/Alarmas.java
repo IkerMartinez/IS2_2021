@@ -36,9 +36,9 @@ public class Alarmas {
 		alarmasActivas.add(a);
 		return true;
 	}
-	//TODO
+	//TODO Substitute all alarmasActivas por alarmas Prioridad
 	public Alarma alarmaMasProxima() {
-		return null;
+		return alarmasPrioridad.poll();
 	}
 	
 	public void desactivaAlarma(Alarma a) {
