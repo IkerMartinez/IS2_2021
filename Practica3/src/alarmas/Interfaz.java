@@ -14,20 +14,16 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
 import java.util.Calendar;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Interfaz {
 
 	private JFrame frame;
 	private JTextField textField;
-	private static Alarmas sistemaAlarmas;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		sistemaAlarmas = new Alarmas();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -65,26 +61,8 @@ public class Interfaz {
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(286, 33, 112, 47);
-		panel.add(textPane);
-		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(286, 111, 112, 47);
-		panel.add(textPane_1);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerDateModel(new Date(1618264800000L), null, null, Calendar.DAY_OF_YEAR));
-		spinner.setBounds(90, 63, 99, 20);
-		panel.add(spinner);
-		
-		textField = new JTextField();
-		textField.setBounds(77, 21, 86, 20);
-		panel.add(textField);
-		textField.setColumns(10);
-		
 		JButton btnOff = new JButton("OFF");
-		btnOff.setBounds(286, 169, 55, 23);
+		btnOff.setBounds(265, 169, 53, 23);
 		panel.add(btnOff);
 		
 		JButton btnOn = new JButton("ON");
@@ -92,21 +70,10 @@ public class Interfaz {
 		panel.add(btnOn);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(287, 203, 111, 23);
+		btnEliminar.setBounds(265, 203, 133, 23);
 		panel.add(btnEliminar);
 		
 		JButton btnNewButton = new JButton("Nueva Alarma");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				Alarma a = new Alarma(textField.getText(),(Date)spinner.getValue());
-				sistemaAlarmas.nuevaAlarma(a);
-				textPane.setText("");
-				textPane.setText(textPane.getText()
-						+sistemaAlarmas.alarmasActivas()
-						+"\n");
-			}
-		});
 		btnNewButton.setBounds(21, 109, 99, 23);
 		panel.add(btnNewButton);
 		
@@ -122,7 +89,10 @@ public class Interfaz {
 		lblHoraAlarma.setBounds(21, 66, 59, 14);
 		panel.add(lblHoraAlarma);
 		
-		
+		textField = new JTextField();
+		textField.setBounds(77, 21, 86, 20);
+		panel.add(textField);
+		textField.setColumns(10);
 		
 		JLabel lblAlarmasActivas = new JLabel("Alarmas Activas");
 		lblAlarmasActivas.setBounds(298, 11, 76, 14);
@@ -132,6 +102,17 @@ public class Interfaz {
 		lblAlarmasDesactivadas.setBounds(298, 83, 111, 14);
 		panel.add(lblAlarmasDesactivadas);
 		
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(286, 33, 112, 47);
+		panel.add(textPane);
 		
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setBounds(286, 111, 112, 47);
+		panel.add(textPane_1);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerDateModel(new Date(1618264800000L), null, null, Calendar.DAY_OF_YEAR));
+		spinner.setBounds(90, 63, 92, 20);
+		panel.add(spinner);
 	}
 }
