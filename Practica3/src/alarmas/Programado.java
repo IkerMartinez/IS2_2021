@@ -26,6 +26,7 @@ public class Programado extends AlarmasState {
 		context.desactivaAlarma(a);;
 		if (a.equals(context.alarmaMasProxima())) {
 			timer.cancel();
+			timer = new Timer();
 		}
 		estadoProgramado.entryAction(context);
 		

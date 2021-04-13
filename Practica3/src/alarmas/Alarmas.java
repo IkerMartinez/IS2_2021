@@ -22,11 +22,11 @@ public class Alarmas {
 		System.out.println("Musica suena");
 	}
 	public boolean eliminaAlarma(Alarma a) {
-		if (buscaAlarmaDesactivada(a.getId()) == a) {
-			alarmasDesactivadas.remove(a);
-			return true;
-		} else if(alarmasPrioridad.contains(a)){
+		if (alarmasPrioridad.contains(a)) {
 			alarmasPrioridad.remove(a);
+			return true;
+		} else if(buscaAlarmaDesactivada(a.getId()) != null){
+			alarmasDesactivadas.remove(a);
 			return true;
 		}
 		
@@ -78,7 +78,7 @@ public class Alarmas {
 	
 	public Alarma buscaAlarmaDesactivada(String id) {
 		for (int i = 0; i < alarmasDesactivadas.size(); i++) {
-			if (alarmasDesactivadas.get(i).getId() == id) {
+			if (alarmasDesactivadas.get(i).getId().equals(id)) {
 				return alarmasDesactivadas.get(i);
 			}
 		}
