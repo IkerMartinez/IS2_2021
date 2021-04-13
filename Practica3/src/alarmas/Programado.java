@@ -19,18 +19,27 @@ public class Programado extends AlarmasState {
 	}
 	public void alarmaOn(Alarmas context, Alarma a) {
 		context.alarmaOn(a);
+		estadoProgramado.entryAction(context);
 	}
 	
-	//TODO Pasarle la alrma que vayamos a apagar y cancelar el timer si la alarma es la más próxima
 	public void alarmaOff(Alarmas context, Alarma a) {
 		context.alarmaOff(a);
+		if (a.equals(context.alarmaMasProxima())) {
+			timer.cancel();
+		}
+		estadoProgramado.entryAction(context);
 		
 	}
 	public void nuevaAlarma(Alarmas context, Alarma a) {
 		context.nuevaAlarma(a);
+		estadoProgramado.entryAction(context);
 	}
 	public void borraAlarma(Alarmas context, Alarma a) {
 		context.eliminaAlarma(a);
+		if (a.equals(context.alarmaMasProxima())) {
+			timer.cancel();
+		}
+		estadoProgramado.entryAction(context);
 		
 	}
 	

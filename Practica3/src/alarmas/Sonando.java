@@ -27,6 +27,10 @@ public class Sonando extends AlarmasState {
 	 public void apagar(Alarmas context) {
 		 this.exitAction(context);
 		 
+		 timer.cancel();
+		 
+		 estadoSonando.exitAction(context);
+		 
 		 context.setState(estadoProgramado);
 		 estadoProgramado.entryAction(context);
 	 }
