@@ -28,6 +28,7 @@ public class Sonando extends AlarmasState {
 		 this.exitAction(context);
 		 
 		 timer.cancel();
+		 timer = new Timer();
 		 
 		 estadoSonando.exitAction(context);
 		 
