@@ -30,7 +30,6 @@ public class Sonando extends AlarmasState {
 		 timer.cancel();
 		 timer = new Timer();
 		 
-		 estadoSonando.exitAction(context);
 		 
 		 context.setState(estadoProgramado);
 		 estadoProgramado.entryAction(context);
