@@ -17,17 +17,17 @@ public class Programado extends AlarmasState {
 		}
 		
 	}
-	public void alarmaOn(Alarmas context) {
-		context.alarmaOn();
+	public void alarmaOn(Alarmas context, Alarma a) {
+		context.alarmaOn(a);
 	}
 	
 	//TODO Pasarle la alrma que vayamos a apagar y cancelar el timer si la alarma es la más próxima
-	public void alarmaOff(Alarmas context) {
-		context.alarmaOff();
+	public void alarmaOff(Alarmas context, Alarma a) {
+		context.alarmaOff(a);
 		
 	}
-	public void nuevaAlarma(Alarmas context) {
-		context.nuevaAlarma();
+	public void nuevaAlarma(Alarmas context, Alarma a) {
+		context.nuevaAlarma(a);
 	}
 	public void borraAlarma(Alarmas context, Alarma a) {
 		context.eliminaAlarma(a);

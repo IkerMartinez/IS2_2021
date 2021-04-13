@@ -7,8 +7,6 @@ public class Alarmas {
 
 	protected final static int INTERVALO_SONAR = 5000;
 	private AlarmasState state;
-	private ArrayList<Alarma> alarmas = new ArrayList<Alarma>();
-	private ArrayList<Alarma> alarmasActivas = new ArrayList<Alarma>();
 	private ArrayList<Alarma> alarmasDesactivadas = new ArrayList<Alarma>();
 	private PriorityQueue<Alarma> alarmasPrioridad = new PriorityQueue<Alarma>();
 	
@@ -24,16 +22,18 @@ public class Alarmas {
 		System.out.println("Musica suena");
 	}
 	public boolean eliminaAlarma(Alarma a) {
-		if (buscaAlarma(a.getId()) == a) {
-			alarmas.remove(a);
+		if (buscaAlarmaDesactivada(a.getId()) == a) {
+			alarmasDesactivadas.remove(a);
+			return true;
+		} else if(alarmasPrioridad.contains(a)){
+			alarmasPrioridad.remove(a);
 			return true;
 		}
 		
 		return false;
 	}
 	public boolean anhadeAlarma(Alarma a) {
-		alarmas.add(a);
-		alarmasActivas.add(a);
+		alarmasPrioridad.add(a);
 		return true;
 	}
 	//TODO Substitute all alarmasActivas por alarmas Prioridad
@@ -42,15 +42,15 @@ public class Alarmas {
 	}
 	
 	public void desactivaAlarma(Alarma a) {
-		alarmasActivas.remove(a);
+		alarmasPrioridad.remove(a);
 		alarmasDesactivadas.add(a);
 	}
 	public void activaAlarma(Alarma a) {
 		alarmasDesactivadas.remove(a);
-		alarmasActivas.add(a);
+		alarmasPrioridad.add(a);
 	}
-	public ArrayList<Alarma> alarmasActivas() {
-		return alarmasActivas;
+	public PriorityQueue<Alarma> alarmasActivas() {
+		return alarmasPrioridad;
 	}
 	public ArrayList<Alarma> alarmasDesactivadas() {
 		return alarmasDesactivadas;
@@ -63,25 +63,26 @@ public class Alarmas {
 	public void apagar() {
 		state.apagar(this);
 	}
-	public void alarmaOn() {
-		state.alarmaOn(this);
+	public void alarmaOn(Alarma a) {
+		state.alarmaOn(this,a);
 	}
-	public void alarmaOff() {
-		state.alarmaOff(this);
+	public void alarmaOff(Alarma a) {
+		state.alarmaOff(this,a);
 	}
-	public void nuevaAlarma() {
-		state.nuevaAlarma(this);
+	public void nuevaAlarma(Alarma a) {
+		state.nuevaAlarma(this,a);
 	}
-	public void borraAlarma() {
-		state.borraAlarma(this);
+	public void borraAlarma(Alarma a) {
+		state.borraAlarma(this,a);
 	}
 	
-	public Alarma buscaAlarma(String id) {
-		for (int i = 0; i < alarmas.size(); i++) {
-			if (alarmas.get(i).getId() == id) {
-				return alarmas.get(i);
+	public Alarma buscaAlarmaDesactivada(String id) {
+		for (int i = 0; i < alarmasDesactivadas.size(); i++) {
+			if (alarmasDesactivadas.get(i).getId() == id) {
+				return alarmasDesactivadas.get(i);
 			}
 		}
 		return null;
 	}
+	
 }

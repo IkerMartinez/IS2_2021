@@ -9,19 +9,19 @@ public abstract class AlarmasState {
 	public static AlarmasState init(Alarmas context) {
 		return estadoDesprogramado;
 	}
-	public void alarmaOn(Alarmas context) {
+	public void alarmaOn(Alarmas context, Alarma a) {
 		
 	}
-	 public void alarmaOff(Alarmas context) {
+	 public void alarmaOff(Alarmas context, Alarma a) {
 		 
 	 }
 	 public void apagar(Alarmas context) {
 		 
 	 }
-	 public void nuevaAlarma(Alarmas context) {
+	 public void nuevaAlarma(Alarmas context, Alarma a) {
 		 
 	 }
-	 public void borraAlarma(Alarmas context) {
+	 public void borraAlarma(Alarmas context, Alarma a) {
 		 
 	 }
 	 public void entryAction(Alarmas context) {
