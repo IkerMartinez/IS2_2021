@@ -97,14 +97,18 @@ public class Interfaz {
 				
 				sistemaAlarmas.desactivaAlarma(a);
 				textPane.setText("");
-				textPane.setText(textPane.getText()
-						+sistemaAlarmas.alarmasActivas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasActivas()) {
+					textPane.setText(textPane.getText()
+							+i.getId()
+							+"\n");
+				}
 				
 				textPane_1.setText("");
-				textPane_1.setText(textPane_1.getText()
-						+sistemaAlarmas.alarmasDesactivadas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasDesactivadas()) {
+					textPane_1.setText(textPane_1.getText()
+							+i.getId()
+							+"\n");
+				}
 				
 			}
 		});
@@ -120,14 +124,18 @@ public class Interfaz {
 				
 				sistemaAlarmas.activaAlarma(a);
 				textPane.setText("");
-				textPane.setText(textPane.getText()
-						+sistemaAlarmas.alarmasActivas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasActivas()) {
+					textPane.setText(textPane.getText()
+							+i.getId()
+							+"\n");
+				}
 				
 				textPane_1.setText("");
-				textPane_1.setText(textPane_1.getText()
-						+sistemaAlarmas.alarmasDesactivadas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasDesactivadas()) {
+					textPane_1.setText(textPane_1.getText()
+							+i.getId()
+							+"\n");
+				}
 			}
 		});
 		btnOn.setBounds(343, 238, 55, 23);
@@ -150,14 +158,18 @@ public class Interfaz {
 				
 				sistemaAlarmas.borraAlarma(a);
 				textPane.setText("");
-				textPane.setText(textPane.getText()
-						+sistemaAlarmas.alarmasActivas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasActivas()) {
+					textPane.setText(textPane.getText()
+							+i.getId()
+							+"\n");
+				}
 				
 				textPane_1.setText("");
-				textPane_1.setText(textPane_1.getText()
-						+sistemaAlarmas.alarmasDesactivadas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasDesactivadas()) {
+					textPane_1.setText(textPane_1.getText()
+							+i.getId()
+							+"\n");
+				}
 				
 			}
 		});
@@ -171,9 +183,12 @@ public class Interfaz {
 				Alarma a = new Alarma(textField.getText(),(Date)spinner.getValue());
 				sistemaAlarmas.nuevaAlarma(a);
 				textPane.setText("");
-				textPane.setText(textPane.getText()
-						+sistemaAlarmas.alarmasActivas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasActivas()) {
+					textPane.setText(textPane.getText()
+							+i.getId()
+							+"\n");
+				}
+				
 			}
 		});
 		btnNewButton.setBounds(21, 191, 99, 23);
@@ -185,14 +200,18 @@ public class Interfaz {
 			public void mouseClicked(MouseEvent e) {
 				sistemaAlarmas.apagar();
 				textPane.setText("");
-				textPane.setText(textPane.getText()
-						+sistemaAlarmas.alarmasActivas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasActivas()) {
+					textPane.setText(textPane.getText()
+							+i.getId()
+							+"\n");
+				}
 				
 				textPane_1.setText("");
-				textPane_1.setText(textPane_1.getText()
-						+sistemaAlarmas.alarmasDesactivadas()
-						+"\n");
+				for(Alarma i:sistemaAlarmas.alarmasDesactivadas()) {
+					textPane_1.setText(textPane_1.getText()
+							+i.getId()
+							+"\n");
+				}
 			}
 		});
 		btnNewButton_1.setBounds(21, 225, 99, 49);
