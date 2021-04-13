@@ -18,12 +18,12 @@ public class Programado extends AlarmasState {
 		
 	}
 	public void alarmaOn(Alarmas context, Alarma a) {
-		context.alarmaOn(a);
+		context.activaAlarma(a);
 		estadoProgramado.entryAction(context);
 	}
 	
 	public void alarmaOff(Alarmas context, Alarma a) {
-		context.alarmaOff(a);
+		context.desactivaAlarma(a);;
 		if (a.equals(context.alarmaMasProxima())) {
 			timer.cancel();
 		}
@@ -31,7 +31,7 @@ public class Programado extends AlarmasState {
 		
 	}
 	public void nuevaAlarma(Alarmas context, Alarma a) {
-		context.nuevaAlarma(a);
+		context.anhadeAlarma(a);
 		estadoProgramado.entryAction(context);
 	}
 	public void borraAlarma(Alarmas context, Alarma a) {
