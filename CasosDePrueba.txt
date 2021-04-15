@@ -1,0 +1,22 @@
+PARAMETRO				CLASES EQ.VALIDAS					CLASES EQ.NOVALIDAS
+nivel cobertura contratado		1000(todoRiesgo)/600(terceroslun)/400(terceros)		otro tipo de seguro
+	
+potencia del coche			0% para <90 5% para 90-110CV y 20% mas de 110CV		valores negativos
+
+nivel de siniestralidad			<1año 200€/entre 1 y 3 años 50€	superio 0€		tiempos negaativos
+
+grado minusvalia			si(25% del precio total)				???
+
+
+CASOS DE PRUEBA VALIDOS(1 WISE)
+
+todoRiesgo, 120,5,si
+tercerosLunas,100,2,no
+terceros,80,0,no
+
+CASOS DE PRUEBA NO VALIDOS(1 WISE)
+
+medioRiesgo,-50,-3,no
+bajoRiesgo,-80-4,si
+
+//CREO QUE LOS TIEMPOS HABRIA QUE MEDIRLOS EN MESES PORQUE SINO PARA PERIODOS INFERIORES A 1 AÑO NO SE PUEDE MEDIR BIEN CON SOLO 0
