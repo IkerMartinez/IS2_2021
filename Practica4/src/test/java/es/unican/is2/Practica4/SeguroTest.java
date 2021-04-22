@@ -1,6 +1,7 @@
 package es.unican.is2.Practica4;
 
 import static org.junit.Assert.assertTrue;
+
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -12,12 +13,16 @@ public class SeguroTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		seguro = new Seguro( 100);
+		seguro = new Seguro(100,new Cliente("1234","luis",true),Cobertura.TERCEROS);
 	}
 	
 	@Test
 	public void testConstructor() {
 		assertTrue(seguro.getPotenciaCV()==100);
+		assertTrue(seguro.getTomadorSeguro().getNombre().equals("luis"));
+		assertTrue(seguro.getTomadorSeguro().getDni().equals("1234"));
+		assertTrue(seguro.getTomadorSeguro().isMinusvalia()==true);
+		assertTrue(seguro.getCobertura().equals(Cobertura.TERCEROS));
 		
 	}
 	
