@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import static org.junit.Assert.fail;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Before;
@@ -18,13 +20,13 @@ public class SeguroTest {
 	@Before
 	public void setUp() throws Exception {
 		seguro = new Seguro(80,new Cliente("1234","luis",false),Cobertura.TERCEROS);
-		seguro.setFechaUltimoSiniestro(new Date(01/01/2021));
+		seguro.setFechaUltimoSiniestro(LocalDate.of(2021, 1, 1));
 		
 		seguro2 = new Seguro(120,new Cliente("1235","elena",true),Cobertura.TODORIESGO);
-		seguro2.setFechaUltimoSiniestro(new Date(02/12/2012));
+		seguro2.setFechaUltimoSiniestro(LocalDate.of(2012, 12, 2));
 		
 		seguro3 = new Seguro(100,new Cliente("1236","paco",false),Cobertura.TERCEROSLUNAS);
-		seguro3.setFechaUltimoSiniestro(new Date(02/12/2019));
+		seguro3.setFechaUltimoSiniestro(LocalDate.of(2018, 12, 2));
 		
 		
 	}
