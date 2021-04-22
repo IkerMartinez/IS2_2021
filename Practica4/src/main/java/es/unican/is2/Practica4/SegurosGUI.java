@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import es.unican.is2.Practica4.Seguro.DatoIncorrectoException;
+
 //import es.unican.is2.seguros.model.Cliente;
 //import es.unican.is2.seguros.model.Cobertura;
 //import es.unican.is2.seguros.model.DatoIncorrectoException;
