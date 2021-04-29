@@ -92,14 +92,15 @@ public class SegurosGUI extends JFrame {
 					int potencia = Integer.parseInt(txtPotencia.getText());
 			    	Cobertura cobertura = Cobertura.valueOf(comboCobertura.getSelectedItem().toString());
 			    	Seguro seguro = new Seguro(potencia, new Cliente("Pepe", "12345678A", minusvalia), cobertura);
+			    	seguro.setFechaUltimoSiniestro(fechaUltimoSiniestro);
 			    	precio = seguro.precio();
 			    	txtPrecio.setText(Double.toString(precio));
 			    	
 				} catch (DatoIncorrectoException e) {
-					txtPrecio.setText(Double.toString(precio));
+					txtPrecio.setText("¡Dato de entrada erróneo!");
 					
 				} catch (DateTimeParseException e) {
-					txtPrecio.setText("La fecha no se pudo parsear");
+					txtPrecio.setText("Formato de fecha no válido");
 				}
 				
 			}
