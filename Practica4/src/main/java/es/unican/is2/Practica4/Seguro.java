@@ -1,11 +1,11 @@
 package es.unican.is2.Practica4;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Seguro {
 
 	//es tipo date la fecha pero no la meto bien al contrsutor y me da error asique ponog int
-	private Date fechaUltimoSiniestro;
+	private LocalDate fechaUltimoSiniestro;
 	private int potenciaCV;
 	
 	public Cobertura cobertura;
@@ -30,11 +30,11 @@ public class Seguro {
 	}
 
 	
-	public Date getFechaUltimoSiniestro() {
+	public LocalDate getFechaUltimoSiniestro() {
 		return fechaUltimoSiniestro;
 	}
 
-	public void setFechaUltimoSiniestro(Date fechaUltimoSiniestro) {
+	public void setFechaUltimoSiniestro(LocalDate fechaUltimoSiniestro) {
 		this.fechaUltimoSiniestro = fechaUltimoSiniestro;
 	}
 
@@ -55,7 +55,7 @@ public class Seguro {
 	}
 	
 	public double precio() throws DatoIncorrectoException{
-		Date hoy = new Date();
+		LocalDate hoy = LocalDate.now();
 		double precio = 0;
 		switch(cobertura) {
 		case TERCEROS:
@@ -75,9 +75,12 @@ public class Seguro {
 		} else if(getPotenciaCV()<0) {
 			throw new DatoIncorrectoException();
 		}
-		if(hoy.getTime() - getFechaUltimoSiniestro().getTime() < 3156000000.0) { //la mierda esta gigante es el numero de milisegundos en 1 año
+		
+		if(getFechaUltimoSiniestro().isAfter(hoy)){
+			throw new DatoIncorrectoException();
+		} else if(getFechaUltimoSiniestro().plusYears(1).isAfter(hoy)) { //la mierda esta gigante es el numero de milisegundos en 1 año
 			precio = precio + 200;
-		} else if (hoy.getTime()-getFechaUltimoSiniestro().getTime()>3156000000.0 && hoy.getTime()-getFechaUltimoSiniestro().getTime()<94608000000.0) {
+		} else if (getFechaUltimoSiniestro().plusYears(3).isAfter(hoy)) {
 			precio = precio + 50;
 		}
 		if (tomadorSeguro.isMinusvalia() == true) {
