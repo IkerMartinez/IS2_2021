@@ -64,7 +64,7 @@ public class SegurosGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		txtFechaUltimoSiniestro = new JTextField();
-		txtFechaUltimoSiniestro.setText("dd/mm/yyyy");
+		txtFechaUltimoSiniestro.setText("dd-mm-yyyy");
 		txtFechaUltimoSiniestro.setName("txtFechaUltimoSiniestro");
 		txtFechaUltimoSiniestro.setBounds(124, 8, 86, 20);
 		contentPane.add(txtFechaUltimoSiniestro);
@@ -84,7 +84,7 @@ public class SegurosGUI extends JFrame {
 		btnCalcular.setName("btnCalcular");
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 				double precio=0.0;
 				try {
 					LocalDate fechaUltimoSiniestro = LocalDate.parse(txtFechaUltimoSiniestro.getText(), formatter);
@@ -113,8 +113,9 @@ public class SegurosGUI extends JFrame {
 		contentPane.add(btnMinusvalia);
 		
 		comboCobertura = new JComboBox();
-		comboCobertura.setModel(new DefaultComboBoxModel(new String[] {"TODO_RIESGO", "TERCEROS_LUNAS", "TERCEROS"}));
+		comboCobertura.setModel(new DefaultComboBoxModel(new String[] {"TODORIESGO", "TERCEROSLUNAS", "TERCEROS"}));
 		comboCobertura.setBounds(124, 44, 188, 23);
+		comboCobertura.setName("comboCobertura");
 		contentPane.add(comboCobertura);
 		
 		JLabel lblCobertura = new JLabel("Cobertura");
