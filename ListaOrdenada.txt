@@ -1,0 +1,43 @@
+METODO				CLASE EQUIVALENCIA
+			VALIDA				NO VALIDA
+get(int indice)		lista con un elto		lista vacia
+			lista con varios eltos
+
+
+add(E elemento)		lista vacia		
+			lista un elto	
+			lista varios eltos
+
+remove(int indice)	lista con un elto		lista vacia
+			lista con varios eltos
+
+
+size()			lista vacia
+			lista 1 elto
+			lista varios eltos
+
+clear()			lista vacia(no eliminas nada)
+			eliminas los eltos que haya
+
+
+
+
+CASOS DE PRUEBA VALIDOS		VALOR ESPERADO		CASOS DE PRUEBA NO VALIDOS	VALOR ESPERADO
+
+get	1.(0) en [1]		[1]			get	1.(3) en []		IndexOutOfBoundsException		
+	2.(3) en [1,2,3,4]	[4]
+
+add	1.(1) en []		[1]						
+	2.(3) en [1]		[1,3]
+	3.(2) en [1,3]		[1,3,2]
+
+remove	1.(0) en [2]		[]
+	2.(2) en [1,2,3,4]	[1,2,4]			remove 1.(4) en [1,2,3]		IndexOutOfBoundsException
+
+size	1.[]			0
+	2.[2]			1
+	3.[1,2,3,4,5]		5
+
+clear	1.[]			[]
+	2.[2]			[]
+	3.[1,2,3,4,5]		[]
