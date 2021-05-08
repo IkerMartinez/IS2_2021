@@ -9,7 +9,8 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.unican.is2.containers.ListaOrdenada;
+// import es.unican.is2.containers.ListaOrdenada; 
+// Para detectar los errores de la clase con el archivo ListaOrdenada-0.0.1.jar
 
 public class ListaOrdenadaTest {
 
@@ -129,12 +130,14 @@ public class ListaOrdenadaTest {
 			assertTrue(lista7.size()==0);
 			
 			lista7.add(1);
+			lista7.clear();
 			assertTrue(lista7.size()==0);
 			
 			lista7.add(2);
 			lista7.add(3);
 			lista7.add(4);
 			lista7.add(5);
+			lista7.clear();
 			assertTrue(lista7.size()==0);
 			
 		} catch (Exception e) {
