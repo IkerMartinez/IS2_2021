@@ -16,9 +16,13 @@ public class Seguro {
 	}
 	
 	public Seguro( int potenciaCV, Cliente cli, Cobertura cobertura) {
-		this.potenciaCV = potenciaCV;
+		/*this.potenciaCV = potenciaCV;
 		this.tomadorSeguro = cli;
-		this.cobertura =cobertura;
+		this.cobertura =cobertura;*/
+		
+		this.setPotenciaCV(potenciaCV);
+		this.setTomadorSeguro(cli);
+		this.setCobertura(cobertura);
 	}
 
 	public Cliente getTomadorSeguro() {

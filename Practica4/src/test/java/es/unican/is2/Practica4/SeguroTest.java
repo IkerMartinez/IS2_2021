@@ -10,11 +10,15 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
+import es.unican.is2.Practica4.Seguro.DatoIncorrectoException;
+
 public class SeguroTest {
 
 	private Seguro seguro;
 	private Seguro seguro2;
 	private Seguro seguro3;
+	private Seguro seguro4;
+	private Seguro seguro5;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -26,6 +30,12 @@ public class SeguroTest {
 		
 		seguro3 = new Seguro(100,new Cliente("1236","paco",false),Cobertura.TERCEROSLUNAS);
 		seguro3.setFechaUltimoSiniestro(LocalDate.of(2018, 12, 2));
+		
+		seguro4 = new Seguro(-100,new Cliente("1236","pepe",false),Cobertura.TERCEROSLUNAS);
+		seguro4.setFechaUltimoSiniestro(LocalDate.of(2018, 12, 2));
+		
+		seguro5 = new Seguro(100,new Cliente("1236","matilda",false),Cobertura.TERCEROSLUNAS);
+		seguro5.setFechaUltimoSiniestro(LocalDate.of(2022, 12, 2));
 		
 		
 	}
@@ -61,5 +71,20 @@ public class SeguroTest {
 		} catch (Exception e3) {
 			fail ("No deberia...");
 		}
+	}
+	
+	@Test(expected = DatoIncorrectoException.class)
+	public void testPotenciaCVNotValid() {
+		
+		
+		seguro4.precio();
+
+	}
+	
+	@Test(expected = DatoIncorrectoException.class)
+	public void testFechaFuturaNotValid() {
+		
+		seguro5.precio();
+
 	}
 }
