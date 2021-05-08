@@ -1,0 +1,15 @@
+COBERTURAS CONDICION
+
+
+add		Lista.size()		Posicion del elemento a añadir
+		(5)			1ºposicion
+		(0)			Posicion intermedia cualquiera
+					Ultima posición
+
+
+
+COBERTURAS DECISION
+
+
+
+COBERTURAS CONDICION/DECISION
