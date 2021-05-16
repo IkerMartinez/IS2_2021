@@ -28,8 +28,8 @@ public class Debito extends Tarjeta { // Añadir método check salario disponibl
 		saldoDiarioDisponible-=x;
 	}
 	
-	public boolean checkSalarioDisponible(double x) throws saldoInsuficienteException{
-		if (saldoDiarioDisponible < x) {
+	public boolean checkSalarioDisponible(double x) throws saldoInsuficienteException{									// WMC +1
+		if (saldoDiarioDisponible < x) {																				// WMC +1	Ccog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		}
 		return true;

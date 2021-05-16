@@ -55,7 +55,7 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 		this.movimientos.add(m);
 	}
 
-	private void checkIngresarNegativa(double x) throws datoErroneoException {
+	private void checkIngresarNegativa(double x) throws datoErroneoException {				//	WMC +1
 		if (x <= 0)																			//	WMC +1		Ccog +1
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
 	}
@@ -71,12 +71,12 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 		this.movimientos.add(m);
 	}
 
-	private void checkRetirarNegativa(double x) throws datoErroneoException {
+	private void checkRetirarNegativa(double x) throws datoErroneoException {				//	WMC +1
 		if (x <= 0)																			//	WMC +1		Ccog +1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 	}
 
-	private void checkSaldo(double x) throws saldoInsuficienteException {
+	private void checkSaldo(double x) throws saldoInsuficienteException {					//	WMC +1
 		if (getSaldo() < x)																	//	WMC +1		Ccog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 	}

@@ -13,16 +13,16 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 										// Ini: WMCn=1.33; Fi: WMCn=1.14
 	
 	private static final double COMISION = 0.05;
-	private double mCredito;
-	private List<Movimiento> mMovimientosMensuales;
-	private List<Movimiento> mhistoricoMovimientos;
+	private double credito;
+	private List<Movimiento> movimientosMensuales;
+	private List<Movimiento> historicoMovimientos;
 	
 	
 	public Credito(String numero, String titular, CuentaAhorro c, double credito) { //			WMC +1
 		super(numero, titular, c);
-		mCredito = credito;
-		mMovimientosMensuales = new LinkedList<Movimiento>();
-		mhistoricoMovimientos = new LinkedList<Movimiento>();
+		this.credito = credito;
+		this.movimientosMensuales = new LinkedList<Movimiento>();
+		this.historicoMovimientos = new LinkedList<Movimiento>();
 	}
 
 	/**
@@ -43,10 +43,10 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 		x += x * COMISION; // A�adimos una comisi�n de un 5%
 		m.setImporte(-x);
 		
-		if (getGastosAcumulados()+x > mCredito)											//		WMC +1		Ccog +1
+		if (getGastosAcumulados()+x > credito)											//		WMC +1		Ccog +1
 			throw new saldoInsuficienteException("Cr�dito insuficiente");
 		else {
-			mMovimientosMensuales.add(m);
+			movimientosMensuales.add(m);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 																						//		WMC +1
 		checkDatoErroneo(x);
 		
-		if (getGastosAcumulados() + x > mCredito)										//		WMC +1		Ccog +1
+		if (getGastosAcumulados() + x > credito)										//		WMC +1		Ccog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		
 		Movimiento m = new Movimiento();
@@ -63,11 +63,11 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 		m.setFecha(now);
 		m.setConcepto("Compra a cr�dito en: " + datos);
 		m.setImporte(-x);
-		mMovimientosMensuales.add(m);
+		movimientosMensuales.add(m);
 	}
 	
-	public boolean checkDatoErroneo(double x) throws datoErroneoException {
-		if (x < 0) {
+	public boolean checkDatoErroneo(double x) throws datoErroneoException {				//			WMC +1
+		if (x < 0) {																	//			WMC +1	Ccog +1
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		}
 		return true;
@@ -97,21 +97,21 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 		if (r != 0)																		//		WMC +1		Ccog +1
 			mCuentaAsociada.addMovimiento(liq);
 		
-		mhistoricoMovimientos.addAll(mMovimientosMensuales);
-		mMovimientosMensuales.clear();
+		historicoMovimientos.addAll(movimientosMensuales);
+		movimientosMensuales.clear();
 	}
 	
-	public double buscaMovimientoMensual() {
+	public double buscaMovimientoMensual() {											//			WMC +1
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) {
-			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
+		for (int i = 0; i < this.movimientosMensuales.size(); i++) {					//			WMC +1	Ccog +1
+			Movimiento m = (Movimiento) movimientosMensuales.get(i);
 			r += m.getImporte();
 		}
 		return r;
 	}
 
 	public List<Movimiento> getMovimientosUltimoMes() {									//		WMC +1
-		return mMovimientosMensuales;
+		return movimientosMensuales;
 	}
 	
 	public Cuenta getCuentaAsociada() {													//		WMC +1
@@ -119,7 +119,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 	}
 	
 	public List<Movimiento> getMovimientos() {											//		WMC +1
-		return mhistoricoMovimientos;
+		return historicoMovimientos;
 	}
 
 }
