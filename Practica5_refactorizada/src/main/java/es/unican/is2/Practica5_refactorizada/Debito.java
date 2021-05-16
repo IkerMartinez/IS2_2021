@@ -14,20 +14,25 @@ public class Debito extends Tarjeta { // Añadir método check salario disponibl
 	
 	@Override
 	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {								// WMC +1
-		if (saldoDiarioDisponible<x) {																					// WMC +1		Ccog +1
-			throw new saldoInsuficienteException("Saldo insuficiente");
-		}
+		
+		checkSalarioDisponible(x);
 		this.mCuentaAsociada.retirar("Retirada en cajero autom�tico", x);
 		saldoDiarioDisponible-=x;
 	}
 	
 	@Override
 	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {	// WMC +1
-		if (saldoDiarioDisponible<x) {																					// WMC +1		Ccog +1
-			throw new saldoInsuficienteException("Saldo insuficiente");
-		}
+		
+		checkSalarioDisponible(x);
 		this.mCuentaAsociada.retirar("Compra en : " + datos, x);
 		saldoDiarioDisponible-=x;
+	}
+	
+	public boolean checkSalarioDisponible(double x) throws saldoInsuficienteException{
+		if (saldoDiarioDisponible < x) {
+			throw new saldoInsuficienteException("Saldo insuficiente");
+		}
+		return true;
 	}
 	
 	public LocalDate getCaducidadDebito() {																				// WMC +1

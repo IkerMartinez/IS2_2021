@@ -1,13 +1,12 @@
 package es.unican.is2.Practica5_refactorizada;
 
-public class Valor { // Why is super there? Delete it
+public class Valor { 
 	
 	private String entidad;	
 	private int numValores;
 	private double cotizacionActual;
 	
 	public Valor(String entidad, int numValores, double cotizacionActual) {				// WMC +1
-		super();
 		this.entidad = entidad;
 		this.numValores = numValores;
 		this.cotizacionActual = cotizacionActual;

@@ -29,9 +29,9 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC("Ingreso en efectivo");
-		m.setI(x);
+		m.setFecha(now);
+		m.setConcepto("Ingreso en efectivo");
+		m.setImporte(x);
 		this.movimientos.add(m);
 	}
 
@@ -42,9 +42,9 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC("Retirada de efectivo");
-		m.setI(-x);
+		m.setFecha(now);
+		m.setConcepto("Retirada de efectivo");
+		m.setImporte(-x);
 		this.movimientos.add(m);
 	}
 
@@ -53,9 +53,9 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC(concepto);
-		m.setI(x);
+		m.setFecha(now);
+		m.setConcepto(concepto);
+		m.setImporte(x);
 		this.movimientos.add(m);
 	}
 
@@ -66,9 +66,9 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC(concepto);
-		m.setI(-x);
+		m.setFecha(now);
+		m.setConcepto(concepto);
+		m.setImporte(-x);
 		this.movimientos.add(m);
 	}
 

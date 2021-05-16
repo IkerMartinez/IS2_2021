@@ -8,10 +8,11 @@ import java.util.List;
 
 public class Credito extends Tarjeta {// Añadir método check salario disponible. Mantiene WMC incrementa n, so WMCn menor
 										// Ini: WMCn=1.33; Fi: WMCn=1.14
-										// Replace Magic Number with Symbolic Constant: retirar 0.05 comision
+										// Replace Magic Number with Symbolic Constant: retirar 0.05 comision. 
 										// Extract method for movimientos mensuales
 										// Ini: WMCn=1.33; Fi: WMCn=1.14
 	
+	private static final double COMISION = 0.05;
 	private double mCredito;
 	private List<Movimiento> mMovimientosMensuales;
 	private List<Movimiento> mhistoricoMovimientos;
@@ -31,16 +32,16 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {//	WMC +1
-		if (x<0)																		//		WMC +1		Ccog +1
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
+	public void retirar(double x) throws saldoInsuficienteException {//	WMC +1
+		
+		checkDatoErroneo(x);
 		
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC("Retirada en cajero autom�tico");
-		x += x * 0.05; // A�adimos una comisi�n de un 5%
-		m.setI(-x);
+		m.setFecha(now);
+		m.setConcepto("Retirada en cajero autom�tico");
+		x += x * COMISION; // A�adimos una comisi�n de un 5%
+		m.setImporte(-x);
 		
 		if (getGastosAcumulados()+x > mCredito)											//		WMC +1		Ccog +1
 			throw new saldoInsuficienteException("Cr�dito insuficiente");
@@ -50,28 +51,30 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {
+	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException {
 																						//		WMC +1
-		if (x<0)																		//		WMC +1		Ccog +1
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
+		checkDatoErroneo(x);
 		
 		if (getGastosAcumulados() + x > mCredito)										//		WMC +1		Ccog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		m.setF(now);
-		m.setC("Compra a cr�dito en: " + datos);
-		m.setI(-x);
+		m.setFecha(now);
+		m.setConcepto("Compra a cr�dito en: " + datos);
+		m.setImporte(-x);
 		mMovimientosMensuales.add(m);
 	}
 	
-    public double getGastosAcumulados() {												//		WMC +1
-		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) {					//		WMC +1		Ccog +1
-			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
-			r += m.getI();
+	public boolean checkDatoErroneo(double x) throws datoErroneoException {
+		if (x < 0) {
+			throw new datoErroneoException("No se puede retirar una cantidad negativa");
 		}
+		return true;
+	}
+	
+    public double getGastosAcumulados() {												//		WMC +1
+		double r = buscaMovimientoMensual();
 		return -r;
 	}
 	
@@ -86,20 +89,25 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 	public void liquidar() {															//		WMC +1
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
-		liq.setF(now);
-		liq.setC("Liquidaci�n de operaciones tarjeta cr�dito");
-		double r = 0.0;
-		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) {					//		WMC +1		Ccog +1
-			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
-			r += m.getI();
-		}
-		liq.setI(r);
+		liq.setFecha(now);
+		liq.setConcepto("Liquidaci�n de operaciones tarjeta cr�dito");
+		double r = buscaMovimientoMensual();
+		liq.setImporte(r);
 	
 		if (r != 0)																		//		WMC +1		Ccog +1
 			mCuentaAsociada.addMovimiento(liq);
 		
 		mhistoricoMovimientos.addAll(mMovimientosMensuales);
 		mMovimientosMensuales.clear();
+	}
+	
+	public double buscaMovimientoMensual() {
+		double r = 0.0;
+		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) {
+			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
+			r += m.getI();
+		}
+		return r;
 	}
 
 	public List<Movimiento> getMovimientosUltimoMes() {									//		WMC +1
