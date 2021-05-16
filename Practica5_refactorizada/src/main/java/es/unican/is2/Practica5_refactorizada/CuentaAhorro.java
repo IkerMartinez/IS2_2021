@@ -11,16 +11,16 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 	
 											// Quitar "m" a atributos porque no se sabe a que se refiere, Rename field
 
-	private List<Movimiento> mMovimientos;
-	private LocalDate mFechaDeCaducidadTarjetaDebito;
-	private LocalDate mFechaDeCaducidadTarjetaCredito;
+	private List<Movimiento> movimientos;
+	private LocalDate fechaDeCaducidadTarjetaDebito;
+	private LocalDate fechaDeCaducidadTarjetaCredito;
 	private double limiteDebito;
 
 	public CuentaAhorro(String numCuenta, LocalDate date, LocalDate date2) {				//	WMC +1
 		super(numCuenta);
-		this.mFechaDeCaducidadTarjetaDebito = date;
-		this.mFechaDeCaducidadTarjetaCredito = date2;
-		mMovimientos = new LinkedList<Movimiento>();
+		this.fechaDeCaducidadTarjetaDebito = date;
+		this.fechaDeCaducidadTarjetaCredito = date2;
+		movimientos = new LinkedList<Movimiento>();
 		limiteDebito = 1000;
 	}
 
@@ -32,7 +32,7 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 		m.setF(now);
 		m.setC("Ingreso en efectivo");
 		m.setI(x);
-		this.mMovimientos.add(m);
+		this.movimientos.add(m);
 	}
 
 	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//	WMC +1
@@ -45,7 +45,7 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 		m.setF(now);
 		m.setC("Retirada de efectivo");
 		m.setI(-x);
-		this.mMovimientos.add(m);
+		this.movimientos.add(m);
 	}
 
 	public void ingresar(String concepto, double x) throws datoErroneoException {			//	WMC +1
@@ -56,7 +56,7 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 		m.setF(now);
 		m.setC(concepto);
 		m.setI(x);
-		this.mMovimientos.add(m);
+		this.movimientos.add(m);
 	}
 
 	public void retirar(String concepto, double x) throws saldoInsuficienteException, datoErroneoException {//	WMC +1
@@ -69,32 +69,32 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 		m.setF(now);
 		m.setC(concepto);
 		m.setI(-x);
-		this.mMovimientos.add(m);
+		this.movimientos.add(m);
 	}
 
 	public double getSaldo() {																//	WMC +1
 		double r = 0.0;
-		for (int i = 0; i < this.mMovimientos.size(); i++) {								//	WMC +1		Ccog +1
-			Movimiento m = (Movimiento) mMovimientos.get(i);
+		for (int i = 0; i < this.movimientos.size(); i++) {								//	WMC +1		Ccog +1
+			Movimiento m = (Movimiento) movimientos.get(i);
 			r += m.getI();
 		}
 		return r;
 	}
 
 	public void addMovimiento(Movimiento m) {												//	WMC +1
-		mMovimientos.add(m);
+		movimientos.add(m);
 	}
 
 	public List<Movimiento> getMovimientos() {												//	WMC +1
-		return mMovimientos;
+		return movimientos;
 	}
 
 	public LocalDate getCaducidadDebito() {													//	WMC +1
-		return this.mFechaDeCaducidadTarjetaDebito;
+		return this.fechaDeCaducidadTarjetaDebito;
 	}
 
 	public LocalDate getCaducidadCredito() {												//	WMC +1
-		return this.mFechaDeCaducidadTarjetaCredito;
+		return this.fechaDeCaducidadTarjetaCredito;
 	}
 
 	public double getLimiteDebito() {														//	WMC +1

@@ -6,39 +6,39 @@ import java.util.List;
 public class Cliente { // Extract class (direccion); introduce parameter object (direccion); hacer método busca (extract method); 
 	
 	public String nombre;
-	public String calle;
-	public String zip;
-	public String localidad;
+	public Direccion direccion;
 	public String telefono;
 	public String dni;
 	
     private List<Cuenta> Cuentas = new LinkedList<Cuenta>();
 
- 	public Cliente(String titular, String calle, String zip, String localidad, 
- 			String telefono, String dni) {  								//WMC +1
+ 	public Cliente(String titular, Direccion direccion, String telefono, String dni) {  								//WMC +1
 		this.nombre = titular;
-		this.calle = calle;
-		this.zip = zip;
-		this.localidad = localidad;
+		this.direccion = direccion;
 		this.telefono = telefono;
 		this.dni = dni;
 	}
 	
 	public void cambiaDireccion(String calle, String zip, String localidad) { //WMC +1
-		this.calle = calle;
-		this.zip = zip;
-		this.localidad = localidad;
+		this.direccion.setCalle(calle);
+		this.direccion.setZip(zip);
+		this.direccion.setLocalidad(localidad);
 	}
 	
 	public double getSaldoTotal() { 										//WMC +1
 		double total = 0.0;
 		for (Cuenta c: Cuentas) {  //										WMC +1		Ccog +1
-			if (c instanceof CuentaAhorro) { //								WMC +1		Ccog +2
-				total += ((CuentaAhorro) c).getSaldo();
-			} else if (c instanceof CuentaValores)  { //					WMC +1		Ccog +2
-				for (Valor v: ((CuentaValores) c).getValores()) { //		WMC +1		Ccog +3
-					total += v.getCotizacionActual()*v.getNumValores();
-				}
+			total += getSaldoCuenta(total, c);
+		}
+		return total;
+	}
+
+	private double getSaldoCuenta(double total, Cuenta c) {			//  WMC +1
+		if (c instanceof CuentaAhorro) { //								WMC +1		Ccog +1
+			total += ((CuentaAhorro) c).getSaldo();
+		} else if (c instanceof CuentaValores)  { //					WMC +1		Ccog +1
+			for (Valor v: ((CuentaValores) c).getValores()) { //		WMC +1		Ccog +2
+				total += v.getCotizacionActual()*v.getNumValores();
 			}
 		}
 		return total;
