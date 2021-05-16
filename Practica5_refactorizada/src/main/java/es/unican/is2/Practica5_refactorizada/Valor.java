@@ -1,6 +1,6 @@
 package es.unican.is2.Practica5_refactorizada;
 
-public class Valor {
+public class Valor { // Why is super there? Delete it
 	
 	private String entidad;	
 	private int numValores;

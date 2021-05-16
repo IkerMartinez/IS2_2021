@@ -6,7 +6,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Credito extends Tarjeta {
+public class Credito extends Tarjeta {// Añadir método check salario disponible. Mantiene WMC incrementa n, so WMCn menor
+										// Ini: WMCn=1.33; Fi: WMCn=1.14
+										// Replace Magic Number with Symbolic Constant: retirar 0.05 comision
+										// Extract method for movimientos mensuales
+										// Ini: WMCn=1.33; Fi: WMCn=1.14
 	
 	private double mCredito;
 	private List<Movimiento> mMovimientosMensuales;

@@ -3,7 +3,7 @@ package es.unican.is2.Practica5_refactorizada;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Cliente {
+public class Cliente { // Extract class (direccion); introduce parameter object (direccion); hacer método busca (extract method); 
 	
 	public String nombre;
 	public String calle;
