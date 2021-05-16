@@ -7,7 +7,7 @@ public class Movimiento { // Rename methods (getI() to getImporte); rename attri
 	private LocalDateTime fecha;
 	private double importe;
 
-	public double getI() {								// WMC +1
+	public double getImporte() {								// WMC +1
 		return importe;
 	}
 

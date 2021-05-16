@@ -32,7 +32,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 	 * @throws datoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException {//	WMC +1
+	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {//	WMC +1
 		
 		checkDatoErroneo(x);
 		
@@ -51,7 +51,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException {
+	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {
 																						//		WMC +1
 		checkDatoErroneo(x);
 		
@@ -105,7 +105,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 		double r = 0.0;
 		for (int i = 0; i < this.mMovimientosMensuales.size(); i++) {
 			Movimiento m = (Movimiento) mMovimientosMensuales.get(i);
-			r += m.getI();
+			r += m.getImporte();
 		}
 		return r;
 	}
