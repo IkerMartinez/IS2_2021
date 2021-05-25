@@ -5,11 +5,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de ingresar y retirar con y sin concepto (con un método con 3
-											// ifs: uno para comprobar el concepto, 
-											// Ini: n=11, WMC=18, WMCn=1.64; Fi: n=9, WMC=13, WMCn=1.44
-	
-											// Quitar "m" a atributos porque no se sabe a que se refiere, Rename field
+public class CuentaAhorro extends Cuenta { 	
 
 	private List<Movimiento> movimientos;
 	private LocalDate fechaDeCaducidadTarjetaDebito;
@@ -84,7 +80,7 @@ public class CuentaAhorro extends Cuenta { 	//Se podría juntar los métodos de 
 	public double getSaldo() {																//	WMC +1
 		double r = 0.0;
 		for (int i = 0; i < this.movimientos.size(); i++) {								//	WMC +1		Ccog +1
-			Movimiento m = (Movimiento) movimientos.get(i);
+			Movimiento m = movimientos.get(i);
 			r += m.getImporte();
 		}
 		return r;

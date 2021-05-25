@@ -3,14 +3,14 @@ package es.unican.is2.Practica5_refactorizada;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Cliente { // Extract class (direccion); introduce parameter object (direccion); hacer método busca (extract method); 
+public class Cliente { 
 	
-	public String nombre;
-	public Direccion direccion;
-	public String telefono;
-	public String dni;
+	private String nombre;
+	private Direccion direccion;
+	private String telefono;
+	private String dni;
 	
-    private List<Cuenta> Cuentas = new LinkedList<Cuenta>();
+    private List<Cuenta> cuentas = new LinkedList<Cuenta>();
 
  	public Cliente(String titular, Direccion direccion, String telefono, String dni) {  								//WMC +1
 		this.nombre = titular;
@@ -27,7 +27,7 @@ public class Cliente { // Extract class (direccion); introduce parameter object 
 	
 	public double getSaldoTotal() { 										//WMC +1
 		double total = 0.0;
-		for (Cuenta c: Cuentas) {  //										WMC +1		Ccog +1
+		for (Cuenta c: cuentas) {  //										WMC +1		Ccog +1
 			total += getSaldoCuenta(total, c);
 		}
 		return total;
@@ -45,7 +45,7 @@ public class Cliente { // Extract class (direccion); introduce parameter object 
 	}
 	
 	public void anhadeCuenta(Cuenta c) { 									//WMC +1
-		Cuentas.add(c);
+		cuentas.add(c);
 	}
 	
 }

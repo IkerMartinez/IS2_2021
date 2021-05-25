@@ -2,7 +2,7 @@ package es.unican.is2.Practica5_refactorizada;
 
 import java.time.LocalDateTime;
 
-public class Movimiento { // Rename methods (getI() to getImporte); rename attributes (mConcepto to concepto) 
+public class Movimiento { 
 	private String concepto;
 	private LocalDateTime fecha;
 	private double importe;

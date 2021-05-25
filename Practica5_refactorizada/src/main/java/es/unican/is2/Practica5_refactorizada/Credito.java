@@ -6,21 +6,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Credito extends Tarjeta {// Añadir método check salario disponible. Mantiene WMC incrementa n, so WMCn menor
-										// Ini: WMCn=1.33; Fi: WMCn=1.14
-										// Replace Magic Number with Symbolic Constant: retirar 0.05 comision. 
-										// Extract method for movimientos mensuales
-										// Ini: WMCn=1.33; Fi: WMCn=1.14
+public class Credito extends Tarjeta {
 	
 	private static final double COMISION = 0.05;
-	private double credito;
+	private double credit;
 	private List<Movimiento> movimientosMensuales;
 	private List<Movimiento> historicoMovimientos;
 	
 	
 	public Credito(String numero, String titular, CuentaAhorro c, double credito) { //			WMC +1
 		super(numero, titular, c);
-		this.credito = credito;
+		this.credit = credit;
 		this.movimientosMensuales = new LinkedList<Movimiento>();
 		this.historicoMovimientos = new LinkedList<Movimiento>();
 	}
@@ -43,7 +39,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 		x += x * COMISION; // A�adimos una comisi�n de un 5%
 		m.setImporte(-x);
 		
-		if (getGastosAcumulados()+x > credito)											//		WMC +1		Ccog +1
+		if (getGastosAcumulados()+x > credit)											//		WMC +1		Ccog +1
 			throw new saldoInsuficienteException("Cr�dito insuficiente");
 		else {
 			movimientosMensuales.add(m);
@@ -55,7 +51,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 																						//		WMC +1
 		checkDatoErroneo(x);
 		
-		if (getGastosAcumulados() + x > credito)										//		WMC +1		Ccog +1
+		if (getGastosAcumulados() + x > credit)										//		WMC +1		Ccog +1
 			throw new saldoInsuficienteException("Saldo insuficiente");
 		
 		Movimiento m = new Movimiento();
@@ -83,9 +79,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 		return this.mCuentaAsociada.getCaducidadCredito();
 	}
 
-	/**
-	 * M�todo que se invoca autom�ticamente el d�a 1 de cada mes
-	 */
+	
 	public void liquidar() {															//		WMC +1
 		Movimiento liq = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -104,7 +98,7 @@ public class Credito extends Tarjeta {// Añadir método check salario disponibl
 	public double buscaMovimientoMensual() {											//			WMC +1
 		double r = 0.0;
 		for (int i = 0; i < this.movimientosMensuales.size(); i++) {					//			WMC +1	Ccog +1
-			Movimiento m = (Movimiento) movimientosMensuales.get(i);
+			Movimiento m = movimientosMensuales.get(i);
 			r += m.getImporte();
 		}
 		return r;

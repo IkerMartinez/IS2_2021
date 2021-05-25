@@ -2,8 +2,7 @@ package es.unican.is2.Practica5_refactorizada;
 
 import java.time.LocalDate;
 
-public class Debito extends Tarjeta { // Añadir método check salario disponible. Mantiene WMC incrementa n, so WMCn menor
-										// Ini: WMCn=1.33; Fi: WMCn=1.14
+public class Debito extends Tarjeta { 
 	
 	private double saldoDiarioDisponible;
 
@@ -39,9 +38,7 @@ public class Debito extends Tarjeta { // Añadir método check salario disponibl
 		return this.mCuentaAsociada.getCaducidadDebito();
 	}
 	
-	/**
-	 * M�todo invocado autom�ticamente a las 00:00 de cada d�a
-	 */
+	
 	public void restableceSaldo() {																						// WMC +1
 		saldoDiarioDisponible = mCuentaAsociada.getLimiteDebito();
 	}

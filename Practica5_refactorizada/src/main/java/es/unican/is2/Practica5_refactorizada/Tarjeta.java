@@ -1,10 +1,11 @@
 package es.unican.is2.Practica5_refactorizada;
 
-public abstract class Tarjeta { // Had considered to Pull up method from Credito and Debito, but that would increase WMCn from 1 to 1.5
-	protected String mNumero, mTitular;		
+public abstract class Tarjeta { 
+	protected String mNumero;
+	protected String mTitular;
 	protected CuentaAhorro mCuentaAsociada;
 
-	public Tarjeta(String numero, String titular, CuentaAhorro c) {										// WMC +1
+	protected Tarjeta(String numero, String titular, CuentaAhorro c) {										// WMC +1
 		mNumero = numero;
 		mTitular = titular;
 		mCuentaAsociada = c;
