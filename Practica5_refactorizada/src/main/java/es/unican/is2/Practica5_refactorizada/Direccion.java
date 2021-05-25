@@ -1,4 +1,4 @@
-package es.unican.is2.Practica5_refactorizada;
+package es.unican.is2.practica5_refactorizada;
 
 public class Direccion {
 	private String calle;

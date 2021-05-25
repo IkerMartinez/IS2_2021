@@ -1,8 +1,6 @@
-package es.unican.is2.Practica5_refactorizada;
+package es.unican.is2.practica5_refactorizada;
 
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +8,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import es.unican.is2.Practica5_refactorizada.*;
 
 public class CuentaAhorroTest {
 	private CuentaAhorro sut;
@@ -31,35 +28,38 @@ public class CuentaAhorroTest {
 		sut = new CuentaAhorro("794311", LocalDate.now().plusYears(3), LocalDate.now().plusYears(4));
 	}
 
+
 	@Test
-	public void testConstructor() {
-		assertTrue(sut.getCaducidadDebito().equals(LocalDate.now().plusYears(3)));
-		assertTrue(sut.getCaducidadCredito().equals(LocalDate.now().plusYears(4)));
+	public void testConstructor() {		
+		assertEquals(sut.getCaducidadDebito(),LocalDate.now().plusYears(3));
+		assertEquals(sut.getCaducidadCredito(),LocalDate.now().plusYears(4));
 		assertTrue(sut.getLimiteDebito()==1000);
-		assertTrue(sut.getMovimientos().size()==0);
-		assertTrue(sut.getNumCuenta().equals("794311"));
+		assertEquals(0,sut.getMovimientos().size());
+		assertEquals("794311",sut.getNumCuenta());
 	}
-	
+
+
 	@Test
 	public void testGetSaldoYAddMovimiento() {
-		assertTrue(sut.getSaldo()==0);	
+		assertTrue(sut.getSaldo()==0);
 
 		sut.addMovimiento(m1);
-		assertTrue(sut.getSaldo() == 100);
+		assertTrue(sut.getSaldo()==100);
 		
 		sut.addMovimiento(m2);
 		sut.addMovimiento(m3);
 		assertTrue(sut.getSaldo()==1800);
 	}
-	
+
+
 	@Test
 	public void testRetirarSinConcepto() {
 		
 		try {
 			sut.retirar(-10);
 			fail("Deber�a lanzar DatoErroneoException");
-		} catch (datoErroneoException e) {
-		} catch (saldoInsuficienteException e) {
+		} catch (DatoErroneoException e) {
+		} catch (SaldoInsuficienteException e) {
 			fail("Deber�a lanzar DatoErroneoException");
 		}
 		
@@ -68,11 +68,11 @@ public class CuentaAhorroTest {
 		try {
 			sut.retirar(50);
 			assertTrue(sut.getSaldo()==50);
-			assertTrue(sut.getMovimientos().size()==2);
-			assertTrue(sut.getMovimientos().get(1).getConcepto().equals("Retirada de efectivo"));
-		} catch (datoErroneoException e) {
+			assertEquals(2,sut.getMovimientos().size());
+			assertEquals("Retirada de efectivo",sut.getMovimientos().get(1).getConcepto());
+		} catch (DatoErroneoException e) {
 			fail("No deber�a lanzar DatoErroneoException");
-		} catch (saldoInsuficienteException e) {
+		} catch (SaldoInsuficienteException e) {
 			fail("No deber�a lanzar SaldoInsuficienteException");
 		}
 		
@@ -80,13 +80,14 @@ public class CuentaAhorroTest {
 		try {
 			sut.retirar(100);
 			fail("Deber�a lanzar SaldoInsuficienteException");
-		} catch (datoErroneoException e) {
+		} catch (DatoErroneoException e) {
 			fail("Deber�a lanzar SaldoInsuficienteException");
-		} catch (saldoInsuficienteException e) {
+		} catch (SaldoInsuficienteException e) {
 			
 		}
 	
 	}
+	
 	
 	@Test
 	public void testIngresarSinConcepto () {
@@ -95,21 +96,21 @@ public class CuentaAhorroTest {
 		try {
 			sut.ingresar(-1);
 			fail("Deber�a lanzar DatoErroneoException");
-		} catch (datoErroneoException e) {
+		} catch (DatoErroneoException e) {
 		}
 
 		// Test ingresar el limite
 		try {
 			sut.ingresar(0.01);
 			assertTrue(sut.getSaldo()==0.01);
-			assertTrue(sut.getMovimientos().size()==1);
-			assertTrue(sut.getMovimientos().get(0).getConcepto().equals("Ingreso en efectivo"));
+			assertEquals(1,sut.getMovimientos().size());
+			assertEquals("Ingreso en efectivo",sut.getMovimientos().get(0).getConcepto());
 			
 			sut.ingresar(100);
 			assertTrue(sut.getSaldo()==100.01);
-			assertTrue(sut.getMovimientos().size()==2);
+			assertEquals(2,sut.getMovimientos().size());
 			
-		} catch (datoErroneoException e) {
+		} catch (DatoErroneoException e) {
 			fail("No deber�a lanzar la excepci�n");
 		}
 		

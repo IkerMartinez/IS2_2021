@@ -1,4 +1,4 @@
-package es.unican.is2.Practica5_refactorizada;
+package es.unican.is2.practica5_refactorizada;
 
 import java.time.LocalDate;
 
@@ -12,7 +12,7 @@ public class Debito extends Tarjeta {
 	
 	
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {								// WMC +1
+	public void retirar(double x) throws SaldoInsuficienteException, DatoErroneoException {								// WMC +1
 		
 		checkSalarioDisponible(x);
 		this.mCuentaAsociada.retirar("Retirada en cajero autom�tico", x);
@@ -20,16 +20,16 @@ public class Debito extends Tarjeta {
 	}
 	
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {	// WMC +1
+	public void pagoEnEstablecimiento(String datos, double x) throws SaldoInsuficienteException, DatoErroneoException {	// WMC +1
 		
 		checkSalarioDisponible(x);
 		this.mCuentaAsociada.retirar("Compra en : " + datos, x);
 		saldoDiarioDisponible-=x;
 	}
 	
-	public boolean checkSalarioDisponible(double x) throws saldoInsuficienteException{									// WMC +1
+	public boolean checkSalarioDisponible(double x) throws SaldoInsuficienteException{									// WMC +1
 		if (saldoDiarioDisponible < x) {																				// WMC +1	Ccog +1
-			throw new saldoInsuficienteException("Saldo insuficiente");
+			throw new SaldoInsuficienteException("Saldo insuficiente");
 		}
 		return true;
 	}

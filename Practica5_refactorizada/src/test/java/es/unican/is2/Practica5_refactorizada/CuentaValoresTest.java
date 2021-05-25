@@ -1,17 +1,15 @@
-package es.unican.is2.Practica5_refactorizada;
+package es.unican.is2.practica5_refactorizada;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import es.unican.is2.Practica5_refactorizada.CuentaValores;
-import es.unican.is2.Practica5_refactorizada.Valor;
+import es.unican.is2.practica5_refactorizada.CuentaValores;
+import es.unican.is2.practica5_refactorizada.Valor;
 
 public class CuentaValoresTest {
 	private CuentaValores sut;
@@ -26,13 +24,14 @@ public class CuentaValoresTest {
 	
 	@Test
 	public void testConstructor() {
-		assertTrue(sut.getNumCuenta().equals("794311"));
-		assertTrue(sut.getValores().size()==2);
+	
+		assertEquals("794311",sut.getNumCuenta());
+		assertEquals(2,sut.getValores().size());
 	}
 	
 	@Test
 	public void testAnhadeValor() {
 		sut.anhadeValor(new Valor("Telepizza", 25, 1.05));
-		assertTrue(sut.getValores().size()==3);
+		assertEquals(3,sut.getValores().size());
 	}
 }

@@ -1,4 +1,4 @@
-package es.unican.is2.Practica5_refactorizada;
+package es.unican.is2.practica5_refactorizada;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ public class Credito extends Tarjeta {
 	private List<Movimiento> historicoMovimientos;
 	
 	
-	public Credito(String numero, String titular, CuentaAhorro c, double credito) { //			WMC +1
+	public Credito(String numero, String titular, CuentaAhorro c, double credit) { //			WMC +1
 		super(numero, titular, c);
 		this.credit = credit;
 		this.movimientosMensuales = new LinkedList<Movimiento>();
@@ -24,11 +24,11 @@ public class Credito extends Tarjeta {
 	/**
 	 * Retirada de dinero en cajero con la tarjeta
 	 * @param x Cantidad a retirar. Se aplica una comisi�n del 5%.
-	 * @throws saldoInsuficienteException
-	 * @throws datoErroneoException
+	 * @throws SaldoInsuficienteException
+	 * @throws DatoErroneoException
 	 */
 	@Override
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {//	WMC +1
+	public void retirar(double x) throws SaldoInsuficienteException, DatoErroneoException {//	WMC +1
 		
 		checkDatoErroneo(x);
 		
@@ -40,19 +40,19 @@ public class Credito extends Tarjeta {
 		m.setImporte(-x);
 		
 		if (getGastosAcumulados()+x > credit)											//		WMC +1		Ccog +1
-			throw new saldoInsuficienteException("Cr�dito insuficiente");
+			throw new SaldoInsuficienteException("Cr�dito insuficiente");
 		else {
 			movimientosMensuales.add(m);
 		}
 	}
 
 	@Override
-	public void pagoEnEstablecimiento(String datos, double x) throws saldoInsuficienteException, datoErroneoException {
+	public void pagoEnEstablecimiento(String datos, double x) throws SaldoInsuficienteException, DatoErroneoException {
 																						//		WMC +1
 		checkDatoErroneo(x);
 		
 		if (getGastosAcumulados() + x > credit)										//		WMC +1		Ccog +1
-			throw new saldoInsuficienteException("Saldo insuficiente");
+			throw new SaldoInsuficienteException("Saldo insuficiente");
 		
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -62,9 +62,9 @@ public class Credito extends Tarjeta {
 		movimientosMensuales.add(m);
 	}
 	
-	public boolean checkDatoErroneo(double x) throws datoErroneoException {				//			WMC +1
+	public boolean checkDatoErroneo(double x) throws DatoErroneoException {				//			WMC +1
 		if (x < 0) {																	//			WMC +1	Ccog +1
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
+			throw new DatoErroneoException("No se puede retirar una cantidad negativa");
 		}
 		return true;
 	}

@@ -12,8 +12,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.projectKey>Practica5_refactorizada</sonar.projectKey>
-		<sonar.projectName>Practica5_refactorizada</sonar.projectName>
+		<sonar.projectKey>Practica5_refactorizada2</sonar.projectKey>
+		<sonar.projectName>Practica5_refactorizada2</sonar.projectName>
 	</properties>
 
 	<dependencies>

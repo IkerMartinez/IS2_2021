@@ -1,4 +1,4 @@
-package es.unican.is2.Practica5_refactorizada;
+package es.unican.is2.practica5_refactorizada;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class CuentaAhorro extends Cuenta {
 		limiteDebito = 1000;
 	}
 
-	public void ingresar(double x) throws datoErroneoException {							//	WMC +1
+	public void ingresar(double x) throws DatoErroneoException {							//	WMC +1
 		checkIngresarNegativa(x);
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -30,7 +30,7 @@ public class CuentaAhorro extends Cuenta {
 		this.movimientos.add(m);
 	}
 
-	public void retirar(double x) throws saldoInsuficienteException, datoErroneoException {	//	WMC +1
+	public void retirar(double x) throws SaldoInsuficienteException, DatoErroneoException {	//	WMC +1
 		checkRetirarNegativa(x);
 		checkSaldo(x);
 		Movimiento m = new Movimiento();
@@ -41,7 +41,7 @@ public class CuentaAhorro extends Cuenta {
 		this.movimientos.add(m);
 	}
 
-	public void ingresar(String concepto, double x) throws datoErroneoException {			//	WMC +1
+	public void ingresar(String concepto, double x) throws DatoErroneoException {			//	WMC +1
 		checkIngresarNegativa(x);
 		Movimiento m = new Movimiento();
 		LocalDateTime now = LocalDateTime.now();
@@ -51,12 +51,12 @@ public class CuentaAhorro extends Cuenta {
 		this.movimientos.add(m);
 	}
 
-	private void checkIngresarNegativa(double x) throws datoErroneoException {				//	WMC +1
+	private void checkIngresarNegativa(double x) throws DatoErroneoException {				//	WMC +1
 		if (x <= 0)																			//	WMC +1		Ccog +1
-			throw new datoErroneoException("No se puede ingresar una cantidad negativa");
+			throw new DatoErroneoException("No se puede ingresar una cantidad negativa");
 	}
 
-	public void retirar(String concepto, double x) throws saldoInsuficienteException, datoErroneoException {//	WMC +1
+	public void retirar(String concepto, double x) throws SaldoInsuficienteException, DatoErroneoException {//	WMC +1
 		checkSaldo(x);
 		checkRetirarNegativa(x);
 		Movimiento m = new Movimiento();
@@ -67,14 +67,14 @@ public class CuentaAhorro extends Cuenta {
 		this.movimientos.add(m);
 	}
 
-	private void checkRetirarNegativa(double x) throws datoErroneoException {				//	WMC +1
+	private void checkRetirarNegativa(double x) throws DatoErroneoException {				//	WMC +1
 		if (x <= 0)																			//	WMC +1		Ccog +1
-			throw new datoErroneoException("No se puede retirar una cantidad negativa");
+			throw new DatoErroneoException("No se puede retirar una cantidad negativa");
 	}
 
-	private void checkSaldo(double x) throws saldoInsuficienteException {					//	WMC +1
+	private void checkSaldo(double x) throws SaldoInsuficienteException {					//	WMC +1
 		if (getSaldo() < x)																	//	WMC +1		Ccog +1
-			throw new saldoInsuficienteException("Saldo insuficiente");
+			throw new SaldoInsuficienteException("Saldo insuficiente");
 	}
 
 	public double getSaldo() {																//	WMC +1

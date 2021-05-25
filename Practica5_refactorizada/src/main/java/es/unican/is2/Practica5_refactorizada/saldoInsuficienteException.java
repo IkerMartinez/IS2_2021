@@ -1,9 +1,9 @@
-package es.unican.is2.Practica5_refactorizada;
+package es.unican.is2.practica5_refactorizada;
 
 @SuppressWarnings("serial")
-public class saldoInsuficienteException extends RuntimeException {
+public class SaldoInsuficienteException extends RuntimeException {
 
-	public saldoInsuficienteException (String mensaje) {
+	public SaldoInsuficienteException (String mensaje) {
 		super(mensaje);
 	}
 }
